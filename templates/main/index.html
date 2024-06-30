@@ -1,0 +1,91 @@
+{% extends "main/base_generic.html" %}
+{% load static %}
+{% block content %}
+
+<section id="we" >
+    <div class="w-[600px] m-auto mt-5">
+        <p class="text-[18px] ">Наша команда профессиональных барберов, может предложить профессиональные услуги стрижки и бритья для мужчин всех возрастов. Наша цель - создать уникальный и неповторимый образ для каждого клиента, подчеркнуть его индивидуальность и стиль.</p>
+    </div>
+    <div class="text-center m-auto mt-5">
+        <h2 class="text-[26px] mb-5">Почему мы?</h2>
+        <div class="flex justify-around text-[14px] static"> 
+            <div class="w-[50%]">
+                <img src="{% static "img/plus.jpg" %}" alt="plus" class="w-[100%] ">
+            </div>   
+                        
+        </div>
+    </div>
+</section>
+
+<section id="services" class="text-center m-auto mt-5">
+    <h2 class="text-[26px] mb-5">Услуги</h2>
+    <div class="flex justify-around text-[14px] static"> 
+        <div class="w-[50%]">
+            <img src="{% static "img/services.jpg" %}" alt="services" class="w-[100%] ">
+        </div>   
+                    
+    </div>
+</section>
+
+<section id="barbers" class="text-center m-auto mt-5">
+    <h2 class="text-[26px] mb-5">Наша команда</h2>
+    <div class="flex justify-around text-[14px] static">
+        {% for worker in workers %}
+            <div class="flex-col items-center m-auto">
+                <img src="{{ worker.photo.url }}" alt="Фото работника" style="display: block; margin: 0 auto;">
+                <h2 class="text-[20px]">{{ worker.surname|add:" "|add:worker.name }}</h2>
+                <p class="text-[18px]">
+                    {% if worker.work_experience <= 4 %}
+                        Стаж {{ worker.work_experience }} года
+                    {% else %}
+                        Стаж {{ worker.work_experience }} лет
+                    {% endif %}
+                </p>
+            </div>
+        {% endfor %}
+    </div>
+</section>    
+
+<section id="contacts" class="text-center m-auto mt-5">
+    <h2 class="text-[26px] mb-5">Контакты</h2>
+    <div class="flex  justify-center gap-10">
+        <div class="">
+            <img class="w-[100%]" alt="" src="{% static "img/map.jpg" %}">
+        </div>
+        <div class="flex-col w-max gap-10">
+            <div class="flex gap-2 mb-5">
+                <img src="{% static "img/location.jpg" %}" alt="Геолокация" class="w-[30px] h-[30px]">
+                <p>г.Кемерово, ул.Мичурина, 58</p>
+            </div>
+            <div class="flex gap-2 mb-5">
+                <img src="{% static "img/phone.jpg" %}" alt="Телефон" class="w-[30px] h-[30px]">
+                <p>+7 000 000 00 00</p>
+            </div>
+            <div class="flex gap-2 mb-5">
+                <a href=# class="hover:translate-y-1 ease-out duration-500 active:animate-bounce"><img src="{% static "img/inst.jpg" %}" alt="Инстаграмм" class="w-[30px] h-[30px]"></a>
+                <p>@man_style</p>
+            </div>
+            <div class="flex gap-2 mb-5">
+                <img src="{% static "img/hours.jpg" %}" alt="Часы работы" class="w-[30px] h-[30px]">
+                <p>9:00 - 21:00</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="bg-[#F90000] text-[24px] text-white flex justify-center p-5 gap-10 items-center mt-10 mb-10">
+        <div class="w-[45%]">
+            <p>Готовы обновить свой стиль? Запишитесь онлайн прямо сейчас . Нажмите здесь, чтобы записаться!</p>
+        </div>
+        <div class=" hover:translate-y-1 ease-out duration-500 active:animate-bounce">
+            <a href="{% url 'record' %}" class="bg-[#000000] text-[20px] p-2 rounded">Записаться</a>
+        </div>
+    </div>
+</section>
+
+<div class="text-white bg-[#000000] text-[20px]">
+    <p>© Copyright 2022 barbershop - All right reserved</p>
+</div>
+
+{% endblock %}

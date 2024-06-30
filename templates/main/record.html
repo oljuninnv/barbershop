@@ -1,0 +1,74 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/input.css'%}" >  
+    <title>{{title}}</title>
+</head>
+<body class="bg-[#EBE9E9]">        
+    <div class="bg-[#F90000] text-[24px] text-white text-center width-[100%] p-5">
+        {% if step_1 %}
+        Шаг 1: Введите ваше имя и телефон, а также выберите дату
+        {% else %}
+        Шаг 2: Выберите мастера
+        {% endif %}
+    </div>
+    <div class="container mx-auto px-4 py-50 mt-5" style="max-width: 1200px;">
+        {% if step_1 %}
+        <form action="{% url 'record' %}" method="GET">
+            {% csrf_token %}
+            <div class="flex-col w-[100%]">
+                <div class="flex mb-5">
+                    <label for="InputName">Имя: </label>
+                    <input name="InputName" type="text" class="w-[400px]">
+                </div>
+                <div class="flex mb-5">
+                    <label for="InputPhone">Телефон: </label>
+                    <input name="InputPhone" type="text" class="w-[400px]">
+                </div>
+                <div class="flex mb-5">
+                    <label for="InputDate">Дата: </label>
+                    <input name="InputDate" type="date" value="{{ date }}" min="{{ date }}" max="{{ max_date }}" class="w-[400px]">
+                </div>
+            </div>
+            <div class="flex mt-10">
+                <div class="mr-5 mt-5">
+                    <a class="bg-[#F90000] p-5 rounded" href="{% url 'home' %} ">Вернуться на главную</a>
+                </div>
+                
+                <div>
+                    <button type="submit" class="bg-[#000000] text-white p-5 rounded">Далее</button>
+                </div>
+                
+            </div>
+            
+            
+            <p class="text-red">{{ er_msg }}</p>
+        </form>
+        {% endif %}
+    
+        {% if step_2 %}
+        <form action="{% url 'thanks' %}" method="POST">
+            {% csrf_token %}
+            <div class="flex-col w-[100%]">
+                <div class="flex mb-5">
+                    <label for="InputTime">Выберите время: </label>
+                    <select id="select" name="InputTime">
+                        {% for time in all_time %}
+                        <option value="{{ time}}">{{ time }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <a class="bg-[#F90000] p-5" href="{% url 'record' %}">Выбрать другую дату</a>
+            <button type="submit" class="bg-[#000000] text-white p-5 rounded">Отправить</button>
+        </form>
+        {% endif %}
+    </div>
+</body>
+</html>

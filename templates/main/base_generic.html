@@ -1,0 +1,46 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/input.css'%}" >  
+    <title>{{title}}</title>
+</head>
+<body>        
+    <header class="px-2 bg-[#626164] md:flex items-center justify-between text-white p-5 text-wrap">
+        <div class=" text-[24px] hover:translate-y-1 ease-out duration-500 active:animate-bounce w-max">
+            <a href="{% url 'home' %}"><font class="font-normal ">Man</font><font class="bg-white text-[#626164] ">Style</font></a>
+        </div>
+        <div class=" inline-flex items-center gap-5 w-max">
+            <a href="#we" class="hover:underline active:animate-bounce">О нас</a>
+            <a href="#services" class="hover:underline active:animate-bounce">Услуги</a>
+            <a href="#barbers" class="hover:underline active:animate-bounce">Барберы</a>
+            <a href="#contacts" class="hover:underline active:animate-bounce">Контакты</a>
+        </div>
+        <div class="w-max">
+            <a href="tel:+7 000 000 00 00" class="hover:underline active:animate-bounce break-words">+7 000 000 00 00</a>
+        </div>
+    </header>
+    <section name="after_header" class="relative ">
+        <img src="{% static "img/after_header.jpg" %}" alt="after_header" class="w-[100%] ">
+        <div class="absolute top-[20%] left-[8%] text-white w-[250px] gap-5 flex-col">
+            <div class="static">
+                <h2 class="text-[24px] mb-5">Место, где рождается ваш новый стиль</h2>
+            <p class="text-[20px]">Хотите знать, почему мы лучшие?
+                Записывайтесь, пока есть места!</p>
+            </div>
+            <div class="mt-10 hover:translate-y-1 ease-out duration-500 active:animate-bounce">
+                <a href="{% url 'record' %}" class="bg-[#F90000] text-[20px] p-2 rounded">Записаться</a>
+            </div>
+        </div>
+    </section>   
+  
+        {%block content%}
+        {% endblock content%}   
+        
+</body>
+</html>

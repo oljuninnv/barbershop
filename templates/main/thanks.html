@@ -1,0 +1,26 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/input.css'%}" >  
+    <title>{{title}}</title>
+</head>
+<body class="bg-[#EBE9E9]"> 
+    <div class="flex-col ml-5 mt-5">
+        <div class="mb-10">
+            <p>Спасибо за заявку {{customer_name}}, вы записаны к {{worker}}</p>
+        </div>
+        
+        <div>
+            <a class="bg-[#F90000] p-5 rounded" href="{% url 'home' %} ">Вернуться на главную</a>
+        </div>
+        
+    </div>
+
+</body>
+</html>
